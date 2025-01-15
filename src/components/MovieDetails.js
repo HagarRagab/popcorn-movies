@@ -31,8 +31,6 @@ export default function MovieDetails({
         Director: director,
     } = movie;
 
-    // if (imdbRating > 8) return <p>test</p>;
-
     useKey("keydown", "Escape", onGoBack);
 
     useEffect(
@@ -50,7 +48,7 @@ export default function MovieDetails({
                 try {
                     setIsLoading(true);
                     const res = await fetch(
-                        `http://www.omdbapi.com/?apikey=${KEY}&i=${movieId}`,
+                        `https://www.omdbapi.com/?apikey=${KEY}&i=${movieId}`,
                         { signal: controller.signal }
                     );
                     if (!res.ok) throw new Error("Connection failed");
@@ -82,8 +80,6 @@ export default function MovieDetails({
             if (!title) return;
             document.title = `Movie | ${title}`;
 
-            // will be executed when the component re-rendered and unmounted
-            // It can remember all the variables at the same place and time where it was created
             return () => (document.title = "Usepopcorn");
         },
         [title]
